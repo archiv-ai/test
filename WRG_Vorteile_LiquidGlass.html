@@ -1,0 +1,508 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    important: '#waermerueck-vorteile',
+    corePlugins: { preflight: false },
+    theme: { extend: {} }
+  }
+</script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  /* ── Animations ───────────────────────────────────────────────────── */
+  #waermerueck-vorteile .fade-up {
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  #waermerueck-vorteile .fade-up.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #waermerueck-vorteile .stagger-card {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  #waermerueck-vorteile .stagger-card.animate-in {
+    animation: wrvSlideUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  @keyframes wrvSlideUp {
+    0%   { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Delay helpers ────────────────────────────────────────────────── */
+  #waermerueck-vorteile .delay-0    { transition-delay: 0s; }
+  #waermerueck-vorteile .delay-400  { transition-delay: 0.4s; }
+  #waermerueck-vorteile .delay-800  { transition-delay: 0.8s; }
+
+  /* ── Page background ──────────────────────────────────────────────── */
+  #waermerueck-vorteile {
+    background: #F8F8FC !important;
+    position: relative;
+  }
+
+  /* ── Background blur orbs ─────────────────────────────────────────── */
+  #waermerueck-vorteile .wrv-bg-blurs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  #waermerueck-vorteile .wrv-blur-1 {
+    position: absolute;
+    width: 800px; height: 680px;
+    top: -150px; left: -140px;
+    background: radial-gradient(ellipse at 38% 38%,
+      rgba(160,140,255,0.10) 0%,
+      rgba(180,160,255,0.05) 42%,
+      transparent 70%) !important;
+    filter: blur(85px);
+  }
+  #waermerueck-vorteile .wrv-blur-2 {
+    position: absolute;
+    width: 880px; height: 740px;
+    top: 5%; right: -230px;
+    background: radial-gradient(ellipse at 62% 38%,
+      rgba(103,82,247,0.07) 0%,
+      rgba(130,110,255,0.04) 44%,
+      transparent 70%) !important;
+    filter: blur(100px);
+  }
+  #waermerueck-vorteile .wrv-blur-3 {
+    position: absolute;
+    width: 660px; height: 540px;
+    bottom: 3%; left: 10%;
+    background: radial-gradient(ellipse at 50% 50%,
+      rgba(220,215,255,0.14) 0%,
+      rgba(200,190,255,0.07) 42%,
+      transparent 68%) !important;
+    filter: blur(90px);
+  }
+
+  /* ── Main glass panel ─────────────────────────────────────────────── */
+  #waermerueck-vorteile .wrv-panel {
+    position: relative !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+    border-radius: 34px !important;
+
+    background:
+      radial-gradient(ellipse 150% 95% at -22% -28%, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.52) 22%, rgba(255,255,255,0.08) 48%, transparent 64%),
+      radial-gradient(ellipse 120% 80% at 118% 112%, rgba(255,255,255,0.78) 0%, rgba(241,238,255,0.32) 30%, transparent 62%),
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.58) 0%,
+        rgba(250,250,255,0.34) 34%,
+        rgba(235,231,255,0.34) 66%,
+        rgba(255,255,255,0.48) 100%
+      ) !important;
+
+    border: 1px solid rgba(255,255,255,0.82) !important;
+    box-shadow:
+      0 48px 100px rgba(103,82,247,0.14),
+      0 16px 42px rgba(31,34,80,0.07),
+      0 0 80px rgba(255,255,255,0.78),
+      inset 0 2px 0 rgba(255,255,255,1),
+      inset 0 -2px 0 rgba(185,174,255,0.22),
+      inset 2px 0 0 rgba(255,255,255,0.70),
+      inset -2px 0 0 rgba(103,82,247,0.055) !important;
+
+    backdrop-filter: blur(52px) saturate(210%) !important;
+    -webkit-backdrop-filter: blur(52px) saturate(210%) !important;
+  }
+
+  /* Outer glass border */
+  #waermerueck-vorteile .wrv-panel::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 34px !important;
+    pointer-events: none !important;
+    z-index: 12 !important;
+    padding: 2.4px !important;
+    background:
+      radial-gradient(circle at 7% 5%, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 7%, rgba(255,255,255,0.38) 18%, transparent 30%),
+      radial-gradient(circle at 93% 97%, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.72) 8%, rgba(190,180,255,0.18) 18%, transparent 31%),
+      linear-gradient(
+        135deg,
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,0.96) 9%,
+        rgba(255,255,255,0.18) 26%,
+        rgba(255,255,255,0.035) 48%,
+        rgba(103,82,247,0.08) 63%,
+        rgba(255,255,255,0.55) 82%,
+        rgba(255,255,255,1) 100%
+      ) !important;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+    -webkit-mask-composite: xor !important;
+    mask-composite: exclude !important;
+  }
+
+  /* Inner glass depth layer */
+  #waermerueck-vorteile .wrv-panel::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 8px !important;
+    border-radius: 27px !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+    background:
+      radial-gradient(ellipse 125% 75% at -18% -25%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.22) 26%, transparent 55%),
+      linear-gradient(145deg, rgba(255,255,255,0.34) 0%, transparent 30%, rgba(103,82,247,0.035) 62%, rgba(255,255,255,0.22) 100%) !important;
+    border: 1px solid rgba(255,255,255,0.46) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.72),
+      inset 0 -1px 0 rgba(103,82,247,0.10) !important;
+  }
+
+  /* ── Panel shine sweep ────────────────────────────────────────────── */
+  #waermerueck-vorteile .wrv-panel-shine {
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 34px !important;
+    pointer-events: none !important;
+    z-index: 11 !important;
+    overflow: hidden !important;
+  }
+  #waermerueck-vorteile .wrv-panel-shine::before {
+    content: "" !important;
+    position: absolute !important;
+    width: 720px !important;
+    height: 480px !important;
+    left: -260px !important;
+    top: -220px !important;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.12) 26%, rgba(255,255,255,0.06) 50%, transparent 68%) !important;
+    filter: blur(3px) !important;
+    opacity: 0.88 !important;
+  }
+  #waermerueck-vorteile .wrv-panel-shine::after {
+    content: "" !important;
+    position: absolute !important;
+    top: -30% !important;
+    left: -92% !important;
+    width: 55% !important;
+    height: 170% !important;
+    background: linear-gradient(
+      108deg,
+      transparent 0%,
+      rgba(255,255,255,0.00) 33%,
+      rgba(255,255,255,0.24) 47%,
+      rgba(255,255,255,0.05) 57%,
+      transparent 74%
+    ) !important;
+    transform: translateX(0) rotate(3deg) !important;
+    opacity: 0.16 !important;
+    animation: wrvLiquidSweep 14s ease-in-out infinite !important;
+  }
+  @keyframes wrvLiquidSweep {
+    0%, 48% { transform: translateX(0) rotate(3deg); opacity: 0.06; }
+    72%      { transform: translateX(340%) rotate(3deg); opacity: 0.18; }
+    100%     { transform: translateX(340%) rotate(3deg); opacity: 0.00; }
+  }
+
+  /* ── Panel inner content area ─────────────────────────────────────── */
+  #waermerueck-vorteile .wrv-panel-inner {
+    position: relative !important;
+    z-index: 4 !important;
+  }
+
+  /* ── Feature item glass tile ──────────────────────────────────────── */
+  #waermerueck-vorteile .wrv-feature {
+    position: relative !important;
+    isolation: isolate !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+    background:
+      radial-gradient(ellipse 130% 90% at -20% -20%, rgba(255,255,255,0.68) 0%, rgba(255,255,255,0.22) 28%, transparent 58%),
+      linear-gradient(
+        160deg,
+        rgba(255,255,255,0.44) 0%,
+        rgba(250,250,255,0.24) 40%,
+        rgba(241,238,255,0.20) 70%,
+        rgba(255,255,255,0.34) 100%
+      ) !important;
+    border: 1px solid rgba(255,255,255,0.76) !important;
+    box-shadow:
+      0 8px 28px rgba(103,82,247,0.08),
+      0 2px 8px rgba(31,34,80,0.04),
+      inset 0 1px 0 rgba(255,255,255,0.92),
+      inset 0 -1px 0 rgba(185,174,255,0.14) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+  }
+  #waermerueck-vorteile .wrv-feature::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 20px !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    padding: 1.5px !important;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,0.70) 12%,
+      rgba(255,255,255,0.10) 36%,
+      rgba(103,82,247,0.07) 58%,
+      rgba(255,255,255,0.65) 84%,
+      rgba(255,255,255,1) 100%
+    ) !important;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
+    -webkit-mask-composite: xor !important;
+    mask-composite: exclude !important;
+  }
+  #waermerueck-vorteile .wrv-feature:hover {
+    transform: translateY(-4px) !important;
+    box-shadow:
+      0 16px 44px rgba(103,82,247,0.13),
+      0 4px 14px rgba(31,34,80,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.96),
+      inset 0 -1px 0 rgba(185,174,255,0.20) !important;
+  }
+  #waermerueck-vorteile .wrv-feature > * {
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  /* ── Icon glass circle ────────────────────────────────────────────── */
+  #waermerueck-vorteile .icon-glass-circle {
+    position: relative !important;
+    isolation: isolate !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0.86) 0%,
+      rgba(238,236,249,0.58) 50%,
+      rgba(234,231,252,0.68) 100%
+    ) !important;
+    border: 1px solid rgba(255,255,255,0.92) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    box-shadow:
+      0 0 0 1px rgba(103,82,247,0.09),
+      0 4px 14px rgba(95,83,232,0.16),
+      inset 0  2px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(103,82,247,0.09),
+      inset  2px 0 0 rgba(255,255,255,0.75) !important;
+  }
+  #waermerueck-vorteile .icon-glass-circle::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0; left: 0; right: 0 !important;
+    height: 50% !important;
+    border-radius: 50% 50% 0 0 !important;
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,0.82) 0%,
+      rgba(255,255,255,0.22) 50%,
+      transparent 100%
+    ) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+  #waermerueck-vorteile .icon-glass-circle i,
+  #waermerueck-vorteile .icon-glass-circle svg {
+    position: relative !important;
+    z-index: 3 !important;
+    color: #5f53e8 !important;
+  }
+
+  /* ── Eyebrow ──────────────────────────────────────────────────────── */
+  #waermerueck-vorteile .wrv-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 16px;
+  }
+  #waermerueck-vorteile .wrv-eyebrow-line {
+    width: 18px;
+    height: 2px;
+    background: #6752F7 !important;
+    border-radius: 2px;
+  }
+  #waermerueck-vorteile .wrv-eyebrow-text {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #6752F7 !important;
+  }
+
+  /* ── Divider ──────────────────────────────────────────────────────── */
+  #waermerueck-vorteile .wrv-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  #waermerueck-vorteile .wrv-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(103,82,247,0.18), transparent);
+  }
+  #waermerueck-vorteile .wrv-divider-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(103,82,247,0.28);
+  }
+</style>
+
+<div id="waermerueck-vorteile" class="antialiased w-full" style="background: #F8F8FC !important;">
+
+  <!-- Background blur orbs -->
+  <div class="wrv-bg-blurs" aria-hidden="true">
+    <div class="wrv-blur-1"></div>
+    <div class="wrv-blur-2"></div>
+    <div class="wrv-blur-3"></div>
+  </div>
+
+  <section class="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-20 pt-[80px]">
+
+    <!-- Glass Panel -->
+    <div class="fade-up delay-0 wrv-panel p-8 md:p-12">
+      <div class="wrv-panel-shine" aria-hidden="true"></div>
+
+      <div class="wrv-panel-inner">
+
+        <!-- Header -->
+        <div class="mb-10">
+          <div class="wrv-eyebrow">
+            <div class="wrv-eyebrow-line"></div>
+            <span class="wrv-eyebrow-text">WÄRMERÜCKGEWINNUNG</span>
+            <div class="wrv-eyebrow-line"></div>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-bold leading-snug" style="line-height: 1.3 !important;">
+            <span style="color: #1e293b !important;">Vorteile moderner </span>
+            <span style="background: linear-gradient(90deg, #6752F7 0%, #2c2084 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important;">Wärmerückgewinnung</span>
+          </h2>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+          <!-- Feature 1 -->
+          <div class="stagger-card wrv-feature flex items-start gap-4">
+            <div class="icon-glass-circle">
+              <i data-lucide="piggy-bank" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Heizkosten senken</h3>
+              <p class="text-sm leading-relaxed" style="color: #475569 !important;">Durch die Rückgewinnung vorhandener Wärme wird weniger zusätzliche Heizenergie benötigt.</p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="stagger-card wrv-feature flex items-start gap-4">
+            <div class="icon-glass-circle">
+              <i data-lucide="refresh-cw" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Energie effizient nutzen</h3>
+              <p class="text-sm leading-relaxed" style="color: #475569 !important;">Vorhandene Wärme bleibt im Gebäude und geht nicht ungenutzt verloren.</p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="stagger-card wrv-feature flex items-start gap-4">
+            <div class="icon-glass-circle">
+              <i data-lucide="leaf" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Nachhaltiger Betrieb</h3>
+              <p class="text-sm leading-relaxed" style="color: #475569 !important;">Weniger Energieverbrauch bedeutet gleichzeitig weniger CO2-Ausstoß.</p>
+            </div>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="stagger-card wrv-feature flex items-start gap-4">
+            <div class="icon-glass-circle">
+              <i data-lucide="home" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Angenehmes Raumklima</h3>
+              <p class="text-sm leading-relaxed" style="color: #475569 !important;">Frische Luft und konstante Temperaturen sorgen für mehr Wohnkomfort.</p>
+            </div>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="stagger-card wrv-feature flex items-start gap-4">
+            <div class="icon-glass-circle">
+              <i data-lucide="shield-check" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Zukunftssicher</h3>
+              <p class="text-sm leading-relaxed" style="color: #475569 !important;">Moderne Systeme unterstützen energieeffizientes und nachhaltiges Wohnen.</p>
+            </div>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="stagger-card wrv-feature flex items-start gap-4">
+            <div class="icon-glass-circle">
+              <i data-lucide="trending-up" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Wertsteigerung der Immobilie</h3>
+              <p class="text-sm leading-relaxed" style="color: #475569 !important;">Effiziente Gebäudetechnik steigert langfristig den Wert Ihrer Immobilie.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Divider + Hinweis -->
+        <div class="mt-10 pt-8">
+          <div class="wrv-divider mb-5">
+            <div class="wrv-divider-line"></div>
+            <div class="wrv-divider-dot"></div>
+            <div class="wrv-divider-line"></div>
+          </div>
+          <p class="text-[12px]" style="color: #94a3b8 !important;">
+            Hinweis: Wie hoch Ihre Energieeinsparung ausfällt, hängt von den individuellen Gegebenheiten Ihres Gebäudes ab. Gerne berechnen wir Ihr persönliches Einsparpotenzial.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    const fadeObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-in");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { root: null, threshold: 0.1 });
+    document.querySelectorAll("#waermerueck-vorteile .fade-up").forEach(el => fadeObserver.observe(el));
+
+    const staggerObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll(".stagger-card");
+          cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 120}ms`;
+            card.classList.add("animate-in");
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { root: null, threshold: 0.1 });
+    document.querySelectorAll("#waermerueck-vorteile .stagger-grid").forEach(g => staggerObserver.observe(g));
+  });
+</script>
