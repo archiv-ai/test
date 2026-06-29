@@ -20,15 +20,15 @@
     transform: translateY(0);
   }
 
-  #waermerueck-vorteile .stagger-card {
+  #waermerueck-vorteile .process-stagger-card {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(50px);
   }
-  #waermerueck-vorteile .stagger-card.animate-in {
-    animation: wrvSlideUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  #waermerueck-vorteile .process-stagger-card.ng-process-animate-in {
+    animation: wrvSlideUp 1.0s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
   @keyframes wrvSlideUp {
-    0%   { opacity: 0; transform: translateY(40px); }
+    0%   { opacity: 0; transform: translateY(50px); }
     100% { opacity: 1; transform: translateY(0); }
   }
 
@@ -36,6 +36,7 @@
   #waermerueck-vorteile .delay-0    { transition-delay: 0s; }
   #waermerueck-vorteile .delay-400  { transition-delay: 0.4s; }
   #waermerueck-vorteile .delay-800  { transition-delay: 0.8s; }
+  #waermerueck-vorteile .delay-1000 { transition-delay: 1.0s; }
 
   /* ── Page background ──────────────────────────────────────────────── */
   #waermerueck-vorteile {
@@ -43,7 +44,7 @@
     position: relative;
   }
 
-  /* ── Background blur orbs ─────────────────────────────────────────── */
+  /* ── Background blur orbs (same intensity as template) ───────────── */
   #waermerueck-vorteile .wrv-bg-blurs {
     position: absolute;
     inset: 0;
@@ -56,8 +57,8 @@
     width: 800px; height: 680px;
     top: -150px; left: -140px;
     background: radial-gradient(ellipse at 38% 38%,
-      rgba(160,140,255,0.10) 0%,
-      rgba(180,160,255,0.05) 42%,
+      rgba(160,140,255,0.18) 0%,
+      rgba(180,160,255,0.10) 42%,
       transparent 70%) !important;
     filter: blur(85px);
   }
@@ -66,8 +67,8 @@
     width: 880px; height: 740px;
     top: 5%; right: -230px;
     background: radial-gradient(ellipse at 62% 38%,
-      rgba(103,82,247,0.07) 0%,
-      rgba(130,110,255,0.04) 44%,
+      rgba(103,82,247,0.14) 0%,
+      rgba(130,110,255,0.08) 44%,
       transparent 70%) !important;
     filter: blur(100px);
   }
@@ -76,13 +77,23 @@
     width: 660px; height: 540px;
     bottom: 3%; left: 10%;
     background: radial-gradient(ellipse at 50% 50%,
-      rgba(220,215,255,0.14) 0%,
-      rgba(200,190,255,0.07) 42%,
+      rgba(220,215,255,0.22) 0%,
+      rgba(200,190,255,0.12) 42%,
       transparent 68%) !important;
     filter: blur(90px);
   }
+  #waermerueck-vorteile .wrv-blur-4 {
+    position: absolute;
+    width: 540px; height: 480px;
+    bottom: -100px; right: 6%;
+    background: radial-gradient(ellipse at 50% 62%,
+      rgba(103,82,247,0.11) 0%,
+      rgba(140,120,255,0.06) 50%,
+      transparent 72%) !important;
+    filter: blur(75px);
+  }
 
-  /* ── Main glass panel ─────────────────────────────────────────────── */
+  /* ── Main glass panel (matches pa-card from template exactly) ─────── */
   #waermerueck-vorteile .wrv-panel {
     position: relative !important;
     isolation: isolate !important;
@@ -102,8 +113,8 @@
 
     border: 1px solid rgba(255,255,255,0.82) !important;
     box-shadow:
-      0 48px 100px rgba(103,82,247,0.14),
-      0 16px 42px rgba(31,34,80,0.07),
+      0 48px 100px rgba(103,82,247,0.16),
+      0 16px 42px rgba(31,34,80,0.08),
       0 0 80px rgba(255,255,255,0.78),
       inset 0 2px 0 rgba(255,255,255,1),
       inset 0 -2px 0 rgba(185,174,255,0.22),
@@ -114,7 +125,7 @@
     -webkit-backdrop-filter: blur(52px) saturate(210%) !important;
   }
 
-  /* Outer glass border */
+  /* Dicker ungleichmäßiger Glasrand – identisch zur Vorlage */
   #waermerueck-vorteile .wrv-panel::before {
     content: "" !important;
     position: absolute !important;
@@ -141,7 +152,7 @@
     mask-composite: exclude !important;
   }
 
-  /* Inner glass depth layer */
+  /* Innere Glasplatte */
   #waermerueck-vorteile .wrv-panel::after {
     content: "" !important;
     position: absolute !important;
@@ -158,7 +169,7 @@
       inset 0 -1px 0 rgba(103,82,247,0.10) !important;
   }
 
-  /* ── Panel shine sweep ────────────────────────────────────────────── */
+  /* ── Panel shine (langsamer Sweep, identisch zur Vorlage) ─────────── */
   #waermerueck-vorteile .wrv-panel-shine {
     position: absolute !important;
     inset: 0 !important;
@@ -170,110 +181,127 @@
   #waermerueck-vorteile .wrv-panel-shine::before {
     content: "" !important;
     position: absolute !important;
-    width: 720px !important;
-    height: 480px !important;
-    left: -260px !important;
-    top: -220px !important;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.32) 0%, rgba(255,255,255,0.12) 26%, rgba(255,255,255,0.06) 50%, transparent 68%) !important;
-    filter: blur(3px) !important;
-    opacity: 0.88 !important;
+    width: 620px !important;
+    height: 420px !important;
+    left: -230px !important;
+    top: -190px !important;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.14) 26%, rgba(255,255,255,0.08) 48%, transparent 68%) !important;
+    filter: blur(2px) !important;
+    opacity: 0.92 !important;
   }
   #waermerueck-vorteile .wrv-panel-shine::after {
     content: "" !important;
     position: absolute !important;
     top: -30% !important;
     left: -92% !important;
-    width: 55% !important;
+    width: 62% !important;
     height: 170% !important;
     background: linear-gradient(
       108deg,
       transparent 0%,
       rgba(255,255,255,0.00) 33%,
-      rgba(255,255,255,0.24) 47%,
-      rgba(255,255,255,0.05) 57%,
+      rgba(255,255,255,0.28) 47%,
+      rgba(255,255,255,0.06) 57%,
       transparent 74%
     ) !important;
     transform: translateX(0) rotate(3deg) !important;
-    opacity: 0.16 !important;
-    animation: wrvLiquidSweep 14s ease-in-out infinite !important;
+    opacity: 0.18 !important;
+    animation: wrvLiquidSlowSweep 12s ease-in-out infinite !important;
   }
-  @keyframes wrvLiquidSweep {
-    0%, 48% { transform: translateX(0) rotate(3deg); opacity: 0.06; }
-    72%      { transform: translateX(340%) rotate(3deg); opacity: 0.18; }
-    100%     { transform: translateX(340%) rotate(3deg); opacity: 0.00; }
+  @keyframes wrvLiquidSlowSweep {
+    0%, 48% { transform: translateX(0) rotate(3deg); opacity: 0.08; }
+    72%      { transform: translateX(305%) rotate(3deg); opacity: 0.20; }
+    100%     { transform: translateX(305%) rotate(3deg); opacity: 0.00; }
   }
 
-  /* ── Panel inner content area ─────────────────────────────────────── */
+  /* ── Panel content z-index ────────────────────────────────────────── */
   #waermerueck-vorteile .wrv-panel-inner {
     position: relative !important;
     z-index: 4 !important;
   }
 
-  /* ── Feature item glass tile ──────────────────────────────────────── */
+  /* ── Feature tiles – pa-card-body style ──────────────────────────── */
   #waermerueck-vorteile .wrv-feature {
     position: relative !important;
     isolation: isolate !important;
-    border-radius: 20px !important;
+    overflow: hidden !important;
+    border-radius: 22px !important;
     padding: 24px !important;
     background:
-      radial-gradient(ellipse 130% 90% at -20% -20%, rgba(255,255,255,0.68) 0%, rgba(255,255,255,0.22) 28%, transparent 58%),
+      radial-gradient(ellipse 130% 90% at -20% -20%, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.24) 28%, transparent 58%),
+      radial-gradient(ellipse 100% 70% at 116% 110%, rgba(255,255,255,0.48) 0%, rgba(235,231,255,0.22) 32%, transparent 62%),
       linear-gradient(
-        160deg,
-        rgba(255,255,255,0.44) 0%,
-        rgba(250,250,255,0.24) 40%,
-        rgba(241,238,255,0.20) 70%,
-        rgba(255,255,255,0.34) 100%
+        180deg,
+        rgba(255,255,255,0.46) 0%,
+        rgba(250,250,255,0.28) 36%,
+        rgba(241,238,255,0.24) 68%,
+        rgba(255,255,255,0.38) 100%
       ) !important;
-    border: 1px solid rgba(255,255,255,0.76) !important;
+    border: 1px solid rgba(255,255,255,0.80) !important;
     box-shadow:
-      0 8px 28px rgba(103,82,247,0.08),
-      0 2px 8px rgba(31,34,80,0.04),
-      inset 0 1px 0 rgba(255,255,255,0.92),
-      inset 0 -1px 0 rgba(185,174,255,0.14) !important;
-    backdrop-filter: blur(28px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
-    transition: transform 0.22s ease, box-shadow 0.22s ease !important;
+      0 12px 36px rgba(103,82,247,0.10),
+      0 3px 10px rgba(31,34,80,0.05),
+      0 0 40px rgba(255,255,255,0.60),
+      inset 0 1px 0 rgba(255,255,255,0.96),
+      inset 0 -1px 0 rgba(185,174,255,0.16) !important;
+    backdrop-filter: blur(34px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(34px) saturate(190%) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
   }
   #waermerueck-vorteile .wrv-feature::before {
     content: "" !important;
     position: absolute !important;
     inset: 0 !important;
-    border-radius: 20px !important;
+    border-radius: 22px !important;
     pointer-events: none !important;
     z-index: 1 !important;
     padding: 1.5px !important;
     background: linear-gradient(
       135deg,
       rgba(255,255,255,1) 0%,
-      rgba(255,255,255,0.70) 12%,
-      rgba(255,255,255,0.10) 36%,
-      rgba(103,82,247,0.07) 58%,
-      rgba(255,255,255,0.65) 84%,
+      rgba(255,255,255,0.80) 12%,
+      rgba(255,255,255,0.14) 34%,
+      rgba(255,255,255,0.04) 50%,
+      rgba(103,82,247,0.07) 66%,
+      rgba(255,255,255,0.60) 84%,
       rgba(255,255,255,1) 100%
     ) !important;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0) !important;
     -webkit-mask-composite: xor !important;
     mask-composite: exclude !important;
   }
+  #waermerueck-vorteile .wrv-feature::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+    background:
+      linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.00) 20%, rgba(255,255,255,0.26) 34%, rgba(255,255,255,0.06) 45%, transparent 64%),
+      linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.04) 18%, transparent 42%) !important;
+    opacity: 0.88 !important;
+    border-radius: 22px !important;
+  }
   #waermerueck-vorteile .wrv-feature:hover {
-    transform: translateY(-4px) !important;
+    transform: translateY(-5px) !important;
     box-shadow:
-      0 16px 44px rgba(103,82,247,0.13),
-      0 4px 14px rgba(31,34,80,0.06),
-      inset 0 1px 0 rgba(255,255,255,0.96),
-      inset 0 -1px 0 rgba(185,174,255,0.20) !important;
+      0 22px 55px rgba(103,82,247,0.16),
+      0 6px 18px rgba(31,34,80,0.07),
+      0 0 55px rgba(255,255,255,0.80),
+      inset 0 1px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(185,174,255,0.22) !important;
   }
   #waermerueck-vorteile .wrv-feature > * {
     position: relative !important;
     z-index: 2 !important;
   }
 
-  /* ── Icon glass circle ────────────────────────────────────────────── */
+  /* ── Icon glass circle (exakt wie Vorlage) ────────────────────────── */
   #waermerueck-vorteile .icon-glass-circle {
     position: relative !important;
     isolation: isolate !important;
-    width: 44px !important;
-    height: 44px !important;
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 50% !important;
     display: flex !important;
     align-items: center !important;
@@ -282,16 +310,16 @@
     flex-shrink: 0 !important;
     background: linear-gradient(
       135deg,
-      rgba(255,255,255,0.86) 0%,
-      rgba(238,236,249,0.58) 50%,
-      rgba(234,231,252,0.68) 100%
+      rgba(255,255,255,0.82) 0%,
+      rgba(238,236,249,0.55) 50%,
+      rgba(234,231,252,0.65) 100%
     ) !important;
     border: 1px solid rgba(255,255,255,0.92) !important;
     backdrop-filter: blur(20px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
     box-shadow:
       0 0 0 1px rgba(103,82,247,0.09),
-      0 4px 14px rgba(95,83,232,0.16),
+      0 4px 12px rgba(95,83,232,0.14),
       inset 0  2px 0 rgba(255,255,255,1),
       inset 0 -1px 0 rgba(103,82,247,0.09),
       inset  2px 0 0 rgba(255,255,255,0.75) !important;
@@ -304,7 +332,7 @@
     border-radius: 50% 50% 0 0 !important;
     background: linear-gradient(
       180deg,
-      rgba(255,255,255,0.82) 0%,
+      rgba(255,255,255,0.80) 0%,
       rgba(255,255,255,0.22) 50%,
       transparent 100%
     ) !important;
@@ -318,27 +346,6 @@
     color: #5f53e8 !important;
   }
 
-  /* ── Eyebrow ──────────────────────────────────────────────────────── */
-  #waermerueck-vorteile .wrv-eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    margin-bottom: 16px;
-  }
-  #waermerueck-vorteile .wrv-eyebrow-line {
-    width: 18px;
-    height: 2px;
-    background: #6752F7 !important;
-    border-radius: 2px;
-  }
-  #waermerueck-vorteile .wrv-eyebrow-text {
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.11em;
-    text-transform: uppercase;
-    color: #6752F7 !important;
-  }
-
   /* ── Divider ──────────────────────────────────────────────────────── */
   #waermerueck-vorteile .wrv-divider {
     display: flex;
@@ -348,13 +355,13 @@
   #waermerueck-vorteile .wrv-divider-line {
     flex: 1;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(103,82,247,0.18), transparent);
+    background: linear-gradient(to right, transparent, rgba(103,82,247,0.20), transparent);
   }
   #waermerueck-vorteile .wrv-divider-dot {
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: rgba(103,82,247,0.28);
+    background: rgba(103,82,247,0.30);
   }
 </style>
 
@@ -365,6 +372,7 @@
     <div class="wrv-blur-1"></div>
     <div class="wrv-blur-2"></div>
     <div class="wrv-blur-3"></div>
+    <div class="wrv-blur-4"></div>
   </div>
 
   <section class="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-20 pt-[80px]">
@@ -377,11 +385,6 @@
 
         <!-- Header -->
         <div class="mb-10">
-          <div class="wrv-eyebrow">
-            <div class="wrv-eyebrow-line"></div>
-            <span class="wrv-eyebrow-text">WÄRMERÜCKGEWINNUNG</span>
-            <div class="wrv-eyebrow-line"></div>
-          </div>
           <h2 class="text-2xl md:text-3xl font-bold leading-snug" style="line-height: 1.3 !important;">
             <span style="color: #1e293b !important;">Vorteile moderner </span>
             <span style="background: linear-gradient(90deg, #6752F7 0%, #2c2084 100%) !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important;">Wärmerückgewinnung</span>
@@ -389,12 +392,12 @@
         </div>
 
         <!-- Features Grid -->
-        <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="process-stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
           <!-- Feature 1 -->
-          <div class="stagger-card wrv-feature flex items-start gap-4">
+          <div class="process-stagger-card wrv-feature flex items-start gap-4">
             <div class="icon-glass-circle">
-              <i data-lucide="piggy-bank" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+              <i data-lucide="piggy-bank" style="width: 18px; height: 18px;" stroke-width="1.5"></i>
             </div>
             <div>
               <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Heizkosten senken</h3>
@@ -403,9 +406,9 @@
           </div>
 
           <!-- Feature 2 -->
-          <div class="stagger-card wrv-feature flex items-start gap-4">
+          <div class="process-stagger-card wrv-feature flex items-start gap-4">
             <div class="icon-glass-circle">
-              <i data-lucide="refresh-cw" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+              <i data-lucide="refresh-cw" style="width: 18px; height: 18px;" stroke-width="1.5"></i>
             </div>
             <div>
               <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Energie effizient nutzen</h3>
@@ -414,9 +417,9 @@
           </div>
 
           <!-- Feature 3 -->
-          <div class="stagger-card wrv-feature flex items-start gap-4">
+          <div class="process-stagger-card wrv-feature flex items-start gap-4">
             <div class="icon-glass-circle">
-              <i data-lucide="leaf" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+              <i data-lucide="leaf" style="width: 18px; height: 18px;" stroke-width="1.5"></i>
             </div>
             <div>
               <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Nachhaltiger Betrieb</h3>
@@ -425,9 +428,9 @@
           </div>
 
           <!-- Feature 4 -->
-          <div class="stagger-card wrv-feature flex items-start gap-4">
+          <div class="process-stagger-card wrv-feature flex items-start gap-4">
             <div class="icon-glass-circle">
-              <i data-lucide="home" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+              <i data-lucide="home" style="width: 18px; height: 18px;" stroke-width="1.5"></i>
             </div>
             <div>
               <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Angenehmes Raumklima</h3>
@@ -436,9 +439,9 @@
           </div>
 
           <!-- Feature 5 -->
-          <div class="stagger-card wrv-feature flex items-start gap-4">
+          <div class="process-stagger-card wrv-feature flex items-start gap-4">
             <div class="icon-glass-circle">
-              <i data-lucide="shield-check" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+              <i data-lucide="shield-check" style="width: 18px; height: 18px;" stroke-width="1.5"></i>
             </div>
             <div>
               <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Zukunftssicher</h3>
@@ -447,9 +450,9 @@
           </div>
 
           <!-- Feature 6 -->
-          <div class="stagger-card wrv-feature flex items-start gap-4">
+          <div class="process-stagger-card wrv-feature flex items-start gap-4">
             <div class="icon-glass-circle">
-              <i data-lucide="trending-up" style="width: 20px; height: 20px;" stroke-width="1.5"></i>
+              <i data-lucide="trending-up" style="width: 18px; height: 18px;" stroke-width="1.5"></i>
             </div>
             <div>
               <h3 class="font-bold mb-2 leading-snug" style="font-size: 16px !important; color: #1e293b !important;">Wertsteigerung der Immobilie</h3>
@@ -491,18 +494,18 @@
     }, { root: null, threshold: 0.1 });
     document.querySelectorAll("#waermerueck-vorteile .fade-up").forEach(el => fadeObserver.observe(el));
 
-    const staggerObserver = new IntersectionObserver((entries, obs) => {
+    const processStaggerObserver = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const cards = entry.target.querySelectorAll(".stagger-card");
+          const cards = entry.target.querySelectorAll(".process-stagger-card");
           cards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 120}ms`;
-            card.classList.add("animate-in");
+            card.style.animationDelay = `${index * 130}ms`;
+            card.classList.add("ng-process-animate-in");
           });
           obs.unobserve(entry.target);
         }
       });
     }, { root: null, threshold: 0.1 });
-    document.querySelectorAll("#waermerueck-vorteile .stagger-grid").forEach(g => staggerObserver.observe(g));
+    document.querySelectorAll("#waermerueck-vorteile .process-stagger-grid").forEach(g => processStaggerObserver.observe(g));
   });
 </script>
