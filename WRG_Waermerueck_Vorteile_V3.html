@@ -1,0 +1,387 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    important: '#waermerueck-vorteile',
+    corePlugins: {
+      preflight: false,
+    },
+    theme: {
+      extend: {}
+    }
+  }
+</script>
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  /* === LIQUID GLASS DESIGN TOKENS === */
+  #waermerueck-vorteile {
+    --lg-blur: 24px;
+    --lg-saturate: 180%;
+    --lg-brightness: 1.08;
+    --lg-tint: rgba(255, 255, 255, 0.62);
+    --lg-tint-fallback: rgba(255, 255, 255, 0.92);
+    --lg-rim: rgba(255, 255, 255, 0.72);
+    --lg-rim-soft: rgba(255, 255, 255, 0.28);
+    --lg-shadow: rgba(15, 23, 42, 0.08);
+    --lg-shadow-deep: rgba(44, 32, 132, 0.06);
+    --lg-accent: #5f53e8;
+    --lg-accent-deep: #2c2084;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* Ambient orbs — gives the glass something to refract */
+  #waermerueck-vorteile::before,
+  #waermerueck-vorteile::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(60px);
+  }
+
+  #waermerueck-vorteile::before {
+    width: 420px;
+    height: 420px;
+    top: -80px;
+    left: -60px;
+    background: radial-gradient(circle, rgba(95, 83, 232, 0.18) 0%, transparent 70%);
+  }
+
+  #waermerueck-vorteile::after {
+    width: 360px;
+    height: 360px;
+    bottom: -40px;
+    right: -40px;
+    background: radial-gradient(circle, rgba(44, 32, 132, 0.12) 0%, transparent 70%);
+  }
+
+  #waermerueck-vorteile > section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* === LIQUID GLASS PANEL === */
+  #waermerueck-vorteile .liquid-glass-panel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: 2rem;
+    background: var(--lg-tint-fallback);
+    border: 1px solid var(--lg-rim-soft);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 -1px 0 rgba(255, 255, 255, 0.25) inset,
+      1px 0 0 rgba(255, 255, 255, 0.2) inset,
+      -1px 0 0 rgba(255, 255, 255, 0.2) inset,
+      0 20px 50px -12px var(--lg-shadow),
+      0 8px 24px -8px var(--lg-shadow-deep);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    #waermerueck-vorteile .liquid-glass-panel {
+      background: var(--lg-tint);
+      backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate)) brightness(var(--lg-brightness));
+      -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate)) brightness(var(--lg-brightness));
+    }
+  }
+
+  /* Specular sheen layer */
+  #waermerueck-vorteile .liquid-glass-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.12) 28%,
+      rgba(255, 255, 255, 0) 52%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+  }
+
+  /* Bottom illumination */
+  #waermerueck-vorteile .liquid-glass-panel::after {
+    content: '';
+    position: absolute;
+    inset: auto 10% -40% 10%;
+    height: 55%;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(ellipse at center, rgba(95, 83, 232, 0.07) 0%, transparent 70%);
+  }
+
+  #waermerueck-vorteile .liquid-glass-panel > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* === LIQUID GLASS FEATURE TILES === */
+  #waermerueck-vorteile .liquid-glass-tile {
+    position: relative;
+    border-radius: 1.25rem;
+    padding: 0.25rem;
+    transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.35s ease;
+  }
+
+  #waermerueck-vorteile .liquid-glass-tile:hover {
+    transform: translateY(-2px);
+  }
+
+  #waermerueck-vorteile .liquid-glass-tile-inner {
+    border-radius: 1rem;
+    padding: 0.75rem 0.5rem;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      0 4px 16px -6px rgba(15, 23, 42, 0.06);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    #waermerueck-vorteile .liquid-glass-tile-inner {
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+    }
+  }
+
+  /* Icon halo */
+  #waermerueck-vorteile .liquid-glass-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.875rem;
+    background: linear-gradient(145deg, rgba(95, 83, 232, 0.14), rgba(44, 32, 132, 0.08));
+    border: 1px solid rgba(95, 83, 232, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.7),
+      0 4px 12px -4px rgba(95, 83, 232, 0.2);
+  }
+
+  /* Hinweis bar */
+  #waermerueck-vorteile .liquid-glass-note {
+    border-radius: 1rem;
+    background: rgba(248, 250, 252, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+    #waermerueck-vorteile .liquid-glass-note {
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+    }
+  }
+
+  /* === SCROLL ANIMATION: FADE UP === */
+  #waermerueck-vorteile .fade-up {
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  #waermerueck-vorteile .fade-up.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* === SCROLL ANIMATION: DEFAULT STAGGER CARDS === */
+  #waermerueck-vorteile .stagger-card {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  #waermerueck-vorteile .stagger-card.animate-in {
+    animation: staggerSlideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes staggerSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* === DELAYS === */
+  #waermerueck-vorteile .delay-100 { transition-delay: 0.1s; }
+  #waermerueck-vorteile .delay-200 { transition-delay: 0.2s; }
+
+  /* === RESPONSIVE BORDERS FIX === */
+  #waermerueck-vorteile .border-slate-200\/40 {
+    border-color: rgba(226, 232, 240, 0.4) !important;
+  }
+
+  @media (min-width: 768px) {
+    #waermerueck-vorteile .md\:border-r {
+      border-right-width: 1px !important;
+      border-right-style: solid !important;
+    }
+    #waermerueck-vorteile .md\:border-r-0 {
+      border-right-width: 0 !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #waermerueck-vorteile .lg\:border-r {
+      border-right-width: 1px !important;
+      border-right-style: solid !important;
+    }
+    #waermerueck-vorteile .lg\:border-r-0 {
+      border-right-width: 0 !important;
+    }
+  }
+</style>
+
+<div id="waermerueck-vorteile" class="bg-[#F8FAFC] text-slate-800 antialiased" style="background: linear-gradient(165deg, #f8fafc 0%, #eef2ff 45%, #f8fafc 100%) !important; padding-top: 0px;">
+
+  <!-- Info Bar Section -->
+  <section class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+
+    <div class="liquid-glass-panel p-6 md:p-10">
+
+      <div class="fade-up delay-100 mb-10 text-center lg:text-left">
+        <h2 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#5f53e8] to-[#2c2084] bg-clip-text text-transparent mb-3" style="line-height: 1.3 !important;">Vorteile moderner Wärmerückgewinnung</h2>
+      </div>
+
+      <div class="stagger-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-6 gap-x-4 items-start">
+
+        <!-- Feature 1 -->
+        <div class="stagger-card liquid-glass-tile md:pr-4 lg:pr-6 md:border-r border-slate-200/40">
+          <div class="liquid-glass-tile-inner flex space-x-4">
+            <div class="liquid-glass-icon text-[#5f53e8] shrink-0">
+              <i data-lucide="piggy-bank" class="w-5 h-5" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-[#5f53e8] mb-2 leading-snug" style="font-size: 16.5px !important;">Heizkosten senken</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Durch die Rückgewinnung vorhandener Wärme wird weniger zusätzliche Heizenergie benötigt.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="stagger-card liquid-glass-tile md:pl-4 lg:pl-6 lg:pr-6 lg:border-r border-slate-200/40">
+          <div class="liquid-glass-tile-inner flex space-x-4">
+            <div class="liquid-glass-icon text-[#5f53e8] shrink-0">
+              <i data-lucide="refresh-cw" class="w-5 h-5" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-[#5f53e8] mb-2 leading-snug" style="font-size: 16.5px !important;">Energie effizient nutzen</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Vorhandene Wärme bleibt im Gebäude und geht nicht ungenutzt verloren.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="stagger-card liquid-glass-tile md:pr-4 lg:pr-0 md:border-r lg:border-r-0 border-slate-200/40 lg:pl-6">
+          <div class="liquid-glass-tile-inner flex space-x-4">
+            <div class="liquid-glass-icon text-[#5f53e8] shrink-0">
+              <i data-lucide="leaf" class="w-5 h-5" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-[#5f53e8] mb-2 leading-snug" style="font-size: 16.5px !important;">Nachhaltiger Betrieb</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Weniger Energieverbrauch bedeutet gleichzeitig weniger CO2-Ausstoß.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="stagger-card liquid-glass-tile md:pl-4 lg:pl-0 lg:pr-6 md:border-r-0 lg:border-r border-slate-200/40">
+          <div class="liquid-glass-tile-inner flex space-x-4">
+            <div class="liquid-glass-icon text-[#5f53e8] shrink-0">
+              <i data-lucide="home" class="w-5 h-5" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-[#5f53e8] mb-2 leading-snug" style="font-size: 16.5px !important;">Angenehmes Raumklima</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Frische Luft und konstante Temperaturen sorgen für mehr Wohnkomfort.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="stagger-card liquid-glass-tile md:pr-4 lg:pr-6 md:border-r lg:border-r border-slate-200/40 lg:pl-6">
+          <div class="liquid-glass-tile-inner flex space-x-4">
+            <div class="liquid-glass-icon text-[#5f53e8] shrink-0">
+              <i data-lucide="shield-check" class="w-5 h-5" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-[#5f53e8] mb-2 leading-snug" style="font-size: 16.5px !important;">Zukunftssicher</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Moderne Systeme unterstützen energieeffizientes und nachhaltiges Wohnen.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="stagger-card liquid-glass-tile md:pl-4 lg:pl-6 md:border-r-0 lg:border-r-0 border-slate-200/40">
+          <div class="liquid-glass-tile-inner flex space-x-4">
+            <div class="liquid-glass-icon text-[#5f53e8] shrink-0">
+              <i data-lucide="trending-up" class="w-5 h-5" stroke-width="1.5"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-[#5f53e8] mb-2 leading-snug" style="font-size: 16.5px !important;">Wertsteigerung der Immobilie</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Effiziente Gebäudetechnik steigert langfristig den Wert Ihrer Immobilie.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Hinweis -->
+      <div class="mt-10 pt-6 border-t border-white/40 liquid-glass-note px-4 py-3" style="border-top: 1px solid rgba(255, 255, 255, 0.45) !important;">
+        <p class="text-[12px] text-slate-400">
+          Hinweis: Wie hoch Ihre Energieeinsparung ausfällt, hängt von den individuellen Gegebenheiten Ihres Gebäudes ab. Gerne berechnen wir Ihr persönliches Einsparpotenzial.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- JAVASCRIPT ANIMATIONEN & ICONS -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+
+    const fadeObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-in");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { root: null, threshold: 0.1 });
+
+    document.querySelectorAll("#waermerueck-vorteile .fade-up").forEach(el => fadeObserver.observe(el));
+
+    const staggerObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll(".stagger-card");
+          cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 150}ms`;
+            card.classList.add("animate-in");
+          });
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { root: null, threshold: 0.1 });
+
+    document.querySelectorAll("#waermerueck-vorteile .stagger-grid").forEach(grid => staggerObserver.observe(grid));
+  });
+</script>
